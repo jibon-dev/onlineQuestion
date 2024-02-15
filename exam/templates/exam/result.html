@@ -1,0 +1,51 @@
+
+{% extends 'base.html' %}
+{% block title %} MCQ Result - {{ block.super }}  {% endblock %}
+
+{% block content %}
+
+    <section class="online-mcq my-3">
+        <div class="container">
+            <h2 class="text-center">MCQ Result </h2>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                              <tr class="text-center">
+                                <th scope="col">Email Address</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Correct Attempt</th>
+                                <th scope="col">Incorrect Attempt</th>
+                                <th scope="col">Not Attempt</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr class="text-center">
+                                <th>{{email}}</th> 
+                                <th>{{contact_number}}</th> 
+                                <th>{{first_name}}</th>
+                                <th>{{last_name}}</th>
+                                <th>{{correct}}</th>
+                                <th>{{incorrect}}</th>
+                                <th>{{unsolve}}</th>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h5 class="text-center">
+                        Thank you for the examination. We look forward to receiving feedback from the Belaface team soon.
+                    </h5>
+                    <hr>
+                    <h4 class="text-center">
+                        <a href="{% url "logout" %}" class="btn btn-info">Click here to logout !</a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

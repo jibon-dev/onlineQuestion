@@ -1,0 +1,104 @@
+{% extends 'root.html' %}
+{% block title %} Register || {{ block.super }} {% endblock title %}
+{% block content %}
+
+    <section id="signup-section">
+        <div class="container-fluid mt-5">
+            <div class="row justify-content-center">
+                <div class="col-sm-9 col-md-5 col-lg-5 col-xl-5">
+                    <!--- Massage Framework --->
+                    {% for message in messages %}
+                        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <div class="text-center">
+                                <span>{{ message }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <!---- End Message --->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-center">
+                                <a href="{% url 'home' %}">Belaface Limited </a>
+                            </h3>
+                        </div>
+                        <div class="card-body" style="background: #F3F3F3">
+                            <!-- Signup form --->
+                            <form method="POST" action=".">{% csrf_token %}
+                                <div class="form-row">
+                                    <!-- First Name-->
+                                    <div class="col-6 form-group">
+                                        <input type="text" class="form-control" placeholder="First name"
+                                            name="first_name">
+                                        {{ form.first_name.errors }}
+                                    </div>
+                                    <!-- Last Name -->
+                                    <div class="col-6 form-group">
+                                        <input type="text" class="form-control" placeholder="Last name"
+                                            name="last_name">
+                                        {{ form.last_name.errors }}
+                                    </div>
+                                </div>
+                                <!-- Email-->
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="E-mail address" name="email">
+                                    {{ form.email.errors }}
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" class="form-control" placeholder="Phone number" name="contact_number">
+                                    {{ form.contact_number.errors }}
+                                </div>
+                                <div class="form-row">
+                                    <!-- Gender -->
+                                    <div class="form-group col-md-6">
+                                        <select class="form-control" name="gender">
+                                            <option value="M" selected>Male</option>
+                                            <option value="F">Female</option>
+                                            <option value="O">Other</option>
+                                        </select>
+                                        {{ form.gender.errors }}
+                                    </div>
+                                    <!-- Date of Birth: -->
+                                    <div class="form-group col-md-6">
+                                        <input type="date" class="form-control" id="datepicker" placeholder="Date of birth" name="dob">
+                                        {{ form.dob.errors }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="password" placeholder="Create password"
+                                        name="password">
+                                    {{ form.password.errors }}
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="password" placeholder="Confirm password"
+                                        name="password2">
+                                    {{ form.password2.errors }}
+                                </div>
+                                <div class="form-group">
+                                    <label class="checkbox-inline"><input type="checkbox" required="required"> I
+                                        accept the
+                                       
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer" style="height: 55px; background: #F3F3F3">
+                            <p class="text-center">Already have an account?
+                                <a href="{% url 'login' %}" class="ml-3"><strong class="font-weight-bold" style="font-size: 18px">Sign In</strong></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Sign up Section -->
+
+    <div class="bottom_margin"></div>
+
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %} Online MCQ Exam {{ block.super }}  {% endblock %}
+
+{% block content %}
+
+    <section class="online-mcq my-3">
+        <div class="container">
+            <h1 class="text-center">Online MCQ</h1>
+            <h3>Time Count  : <span  id="time"></span></h3>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div id="questions">
+                        <form action="{% url "online_mcq" %}" method="POST" id="forms">
+                            {% csrf_token %}
+                            <h4 class="mb-3">{{question.id}}. {{question.question}}</h4>
+                            <input type="radio" name="{{question.question}}" value="{{question.option_one}}"> A. {{question.option_one}}<br><br>
+                            <input type="radio" name="{{question.question}}" value="{{question.option_two}}"> B. {{question.option_two}}<br><br>
+                            <input type="radio" name="{{question.question}}" value="{{question.option_three}}"> C. {{question.option_three}}<br><br>
+                            <input type="radio" name="{{question.question}}" value="{{question.option_four}}"> D. {{question.option_four}}<br>
+                            <hr>
+                            <input type="hidden" name="id" value="{{question.id}}">
+                            <input type="button" class="btn btn-info" onclick="myFunction()" value="Next Question" id="btn">
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        function startTimer(duration) {
+          var timer = duration, hours, minutes, seconds;
+          setInterval(function () {
+              minutes = parseInt(timer / 60, 10);
+              seconds = parseInt(timer % 60, 10);
+    
+              minutes = minutes < 10 ? "0" + minutes : minutes;
+              seconds = seconds < 10 ? "0" + seconds : seconds;
+    
+              document.getElementById("time").innerHTML = minutes + ":" + seconds;
+              
+              if (--timer < 0) {
+                setTimeout(function(){
+                document.getElementById("forms").submit();
+               }, 1);
+              }
+          }, 1000);
+        }
+        function myFunction() {
+          document.getElementById("forms").submit();
+        }
+
+        // Duration =====================================
+        window.onload = startTimer({{question.duration}});
+        $(window).on('unload', function() {
+            $.ajax({
+            url: "your-url",
+            type: "post",
+            data: 1,
+            success: function(data) {
+                alert(data.result);
+            }});
+        });
+        
+    </script>
+
+{% endblock content %}
